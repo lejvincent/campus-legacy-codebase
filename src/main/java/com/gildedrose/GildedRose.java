@@ -10,90 +10,93 @@ public class GildedRose {
     }
 
     public void updateQuality() {
+        reports = " INIT -> " + items[0];
         for (Item item : items) {
-            reports= reports + "START -> Name = " + item.name + ", SellIn = " + item.sellIn + ", Quality = " + item.quality;
-            if (item.name.equals("Aged Brie")) {
-                item = this.isAgedBrie(item);
-            } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                item = this.isTAFKAL80ETCconcert(item);
-            } else if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
-                return;
-            } else if (item.name.startsWith("Conjured")) {
-                item = this.isConjured(item);
-            } else {
-                item = this.isAnnoying(item);
-            }
-            reports = reports + "END -> Name = " + item.name + ", SellIn = " + item.sellIn + ", Quality = " + item.quality;
+            reports = reports + " START -> " + item.name + ", " + item.sellIn + ", " +  item.quality;
+            System.out.println(item);
+            this.isNotSulfuras(item);
         }
-        logger.debug("Reports : <br>" + reports);
+        reports = reports + " END -> " + items[0];
+        logger.debug(reports);
+    }
+
+    private void isNotSulfuras(Item item) {
+
+        if (!item.name.equals("Sulfuras, Hand of Ragnaros")) {
+            if (item.quality < 50) {
+                this.isQualityLowerThanFifty(item);
+            } else {
+                item.sellIn = item.sellIn - 1;
+            }
+            item.sellIn = item.sellIn - 1;
+        }
+    }
+
+    private void isQualityLowerThanFifty(Item item) {
+        if (item.sellIn > 0) {
+            if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+                this.isBackstage(item);
+            } else {
+                if (item.quality > 0) {
+                    item.quality = item.quality - 1;
+                }
+            }
+        } else if (item.name.equals("Aged Brie")) {
+            item.quality = item.quality + 2;
+        } else {
+            this.isSellInNegative(item);
+        }
+    }
+
+    private void isBackstage(Item item) {
+        if (item.sellIn < 11 && item.sellIn > 5) {
+            this.isBetween5And11(item);
+        } else if (item.sellIn < 6) {
+            this.isBetween0And6(item);
+        } else {
+            item.quality = item.quality + 1;
+        }
+    }
+
+    private void isBetween5And11(Item item) {
+        if (item.quality == 49) {
+            item.quality = item.quality + 1;
+        } else {
+            item.quality = item.quality + 2;
+        }
+    }
+
+    private void isBetween0And6(Item item) {
+        if (item.quality == 49) {
+            item.quality = item.quality + 1;
+        } else if (item.quality == 48) {
+            item.quality = item.quality + 2;
+        } else {
+            item.quality = item.quality + 3;
+        }
+    }
+
+    private void isSellInNegative(Item item) {
+        if (item.name.startsWith("Conjured")) {
+            item.quality = item.quality - 2;
+        } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
+            item.quality = 0;
+        } else {
+            this.isNotConjuredOrBackstage(item);
+        }
+    }
+
+    private void isNotConjuredOrBackstage(Item item) {
+        if (item.quality == 1) {
+            item.quality = item.quality - 1;
+        } else {
+            if (item.quality != 0) {
+                item.quality = item.quality - 2;
+            }
+        }
     }
 
     public Item[] getItems() {
         return items;
     }
-
-    public Item isAnnoying(Item item) {
-        reports = reports + "is Annoying";
-        item.sellIn = item.sellIn - 1;
-
-        if (item.quality < 50 && item.sellIn >= 0) {
-            item.quality = item.quality + 1;
-        } else if (item.quality > 0 && item.sellIn < 0) {
-            if (item.quality == 1) {
-                item.quality = item.quality - 1;
-            } else {
-                item.quality = item.quality - 2;
-            }
-        }
-        return item;
-    }
-
-    public Item isAgedBrie(Item item) {
-        reports = reports + "is Aged Brie";
-        item.sellIn = item.sellIn - 1;
-
-        if (item.quality < 50) {
-            item.quality = item.quality + 1;
-        }
-        return item;
-    }
-
-    public Item isTAFKAL80ETCconcert(Item item) {
-        reports = reports + "is TAFKAL80ETC Concert";
-        item.sellIn = item.sellIn - 1;
-
-        if (item.quality < 50 && item.sellIn < 11 && item.sellIn > 5) {
-            if (item.quality == 49) {
-                item.quality = item.quality + 1;
-            } else {
-                item.quality = item.quality + 2;
-            }
-        } else if (item.quality < 50 && item.sellIn < 6 && item.sellIn > 0) {
-            if (item.quality == 49) {
-                item.quality = item.quality + 1;
-            } else {
-                item.quality = item.quality + 3;
-            }
-        } else if (item.quality < 50 && item.sellIn == 0) {
-            item.quality = 0;
-        } else if (item.quality < 50) {
-            item.quality = item.quality + 1;
-        }
-        return item;
-    }
-
-    public Item isConjured(Item item) {
-        reports = reports + "is Conjured";
-        item.sellIn = item.sellIn - 1;
-
-        if (item.quality > 0 && item.quality == 1) {
-            item.quality = item.quality - 1;
-        } else if (item.quality > 0 && item.sellIn < 0) {
-            item.quality = item.quality - 2;
-        } else if (item.quality > 0) {
-            item.quality = item.quality - 1;
-        }
-        return item;
-    }
-
 }
