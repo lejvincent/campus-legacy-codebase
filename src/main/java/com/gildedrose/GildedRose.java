@@ -21,6 +21,8 @@ public class GildedRose {
                                 items[i].quality = items[i].quality - 1;
                             } else if (items[i].sellIn < 0 && items[i].quality != 0 && items[i].quality > 0) {
                                 items[i].quality = items[i].quality - 2;
+                            } else {
+                                items[i].quality = items[i].quality - 1;
                             }
                         } else {
                             items[i].quality = items[i].quality - 1;
