@@ -16,7 +16,7 @@ public class GildedRose {
                     && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
                 if (items[i].quality > 0) {
                     if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                        if (items[i].name.contains("Conjured")) {
+                        if (items[i].name.startsWith("Conjured")) {
                             if (items[i].quality == 1) {
                                 items[i].quality = items[i].quality - 1;
                             } else if (items[i].sellIn < 0 && items[i].quality != 0 && items[i].quality > 0) {
