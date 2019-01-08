@@ -10,31 +10,30 @@ public class GildedRose {
     }
 
     public void updateQuality() {
-        reports = "Init : " + items[0].name + "<br />";
         for (Item item : items) {
-            reports = reports + "START ->" + " Name = " + item.name + ", SellIn = " + item.sellIn + ", Quality = " + item.quality + "<br />";
+            reports= reports + "START -> Name = " + item.name + ", SellIn = " + item.sellIn + ", Quality = " + item.quality;
             if (item.name.equals("Aged Brie")) {
-                this.isAgedBrie(item);
+                item = this.isAgedBrie(item);
             } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                this.isTAFKAL80ETCconcert(item);
+                item = this.isTAFKAL80ETCconcert(item);
             } else if (item.name.equals("Sulfuras, Hand of Ragnaros")) {
                 return;
             } else if (item.name.startsWith("Conjured")) {
-                this.isConjured(item);
+                item = this.isConjured(item);
             } else {
-                this.isAnnoying(item);
+                item = this.isAnnoying(item);
             }
-            reports = reports + "END ->" + " Name = " + item.name + ", SellIn = " + item.sellIn + ", Quality = " + item.quality + "<br />";
+            reports = reports + "END -> Name = " + item.name + ", SellIn = " + item.sellIn + ", Quality = " + item.quality;
         }
-        logger.debug("Reports : <br>" +reports);
+        logger.debug("Reports : " + reports);
     }
 
     public Item[] getItems() {
         return items;
     }
 
-    public void isAnnoying(Item item) {
-        reports = reports + "is Annoying <br />";
+    public Item isAnnoying(Item item) {
+        reports = reports + "is Annoying";
         item.sellIn = item.sellIn - 1;
 
         if (item.quality < 50 && item.sellIn >= 0) {
@@ -46,61 +45,55 @@ public class GildedRose {
                 item.quality = item.quality - 2;
             }
         }
+        return item;
     }
 
-    public void isAgedBrie(Item item) {
-        reports = reports + "is Aged Brie <br />";
+    public Item isAgedBrie(Item item) {
+        reports = reports + "is Aged Brie";
         item.sellIn = item.sellIn - 1;
 
         if (item.quality < 50) {
             item.quality = item.quality + 1;
         }
+        return item;
     }
 
-    public void isTAFKAL80ETCconcert(Item item) {
-        reports = reports + "is TAFKAL80ETC Concert <br />";
+    public Item isTAFKAL80ETCconcert(Item item) {
+        reports = reports + "is TAFKAL80ETC Concert";
         item.sellIn = item.sellIn - 1;
 
-        if (item.quality < 50) {
-            if (item.sellIn < 11 && item.sellIn > 5) {
-                if (item.quality < 50) {
-                    if (item.quality == 49) {
-                        item.quality = item.quality + 1;
-                    } else {
-                        item.quality = item.quality + 2;
-                    }
-                }
-            } else if (item.sellIn < 6 && item.sellIn > 0) {
-                if (item.quality < 50) {
-                    if (item.quality == 49) {
-                        item.quality = item.quality + 1;
-                    } else {
-                        item.quality = item.quality + 3;
-                    }
-                }
-            } else if (item.sellIn == 0) {
-                item.quality = item.quality - item.quality;
+        if (item.quality < 50 && item.sellIn < 11 && item.sellIn > 5) {
+            if (item.quality == 49) {
+                item.quality = item.quality + 1;
             } else {
-                if (item.quality < 50) {
-                    item.quality = item.quality + 1;
-                }
+                item.quality = item.quality + 2;
             }
+        } else if (item.quality < 50 && item.sellIn < 6 && item.sellIn > 0) {
+            if (item.quality == 49) {
+                item.quality = item.quality + 1;
+            } else {
+                item.quality = item.quality + 3;
+            }
+        } else if (item.quality < 50 && item.sellIn == 0) {
+            item.quality = 0;
+        } else if (item.quality < 50) {
+            item.quality = item.quality + 1;
         }
+        return item;
     }
 
-    public void isConjured(Item item) {
-        reports = reports + "is Conjured <br />";
+    public Item isConjured(Item item) {
+        reports = reports + "is Conjured";
         item.sellIn = item.sellIn - 1;
 
-        if (item.quality > 0) {
-            if (item.quality == 1) {
-                item.quality = item.quality - 1;
-            } else if (item.sellIn < 0 && item.quality > 0) {
-                item.quality = item.quality - 2;
-            } else {
-                item.quality = item.quality - 1;
-            }
+        if (item.quality == 1) {
+            item.quality = item.quality - 1;
+        } else if (item.quality > 0 && item.sellIn < 0) {
+            item.quality = item.quality - 2;
+        } else if (item.quality > 0) {
+            item.quality = item.quality - 1;
         }
+        return item;
     }
 
 }
