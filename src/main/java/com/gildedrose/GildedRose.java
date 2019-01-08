@@ -9,7 +9,7 @@ public class GildedRose {
     }
 
     public void updateQuality() {
-        logger.debug("START ->" + " Name = {}" + items[i].name + ", SellIn = {}" + items[i].sellIn + ", Quality = {}" + items[i].quality);
+        logger.debug("START ->" + items);
         for (int i = 0; i < items.length; i++) {
             if (!items[i].name.equals("Aged Brie")
                     && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
