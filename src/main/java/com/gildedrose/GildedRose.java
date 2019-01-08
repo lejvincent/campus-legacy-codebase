@@ -28,6 +28,8 @@ public class GildedRose {
                             items[i].quality = items[i].quality - 1;
                         }
                     }
+                } else if (items[i].quality <= 0 && items[i].name.contains("Conjured")) {
+                    items[i].quality = items[i].quality - 2;
                 }
             } else {
                 if (items[i].quality < 50) {
