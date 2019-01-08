@@ -9,60 +9,39 @@ public class GildedRose {
     }
 
     public void updateQuality() {
-        logger.debug("START ->" + items);
+        logger.debug("Init : " + items[0]);
         for (int i = 0; i < items.length; i++) {
+            logger.debug("START ->" + " Name = " + items[i].name + ", SellIn = " + items[i].sellIn + ", Quality = " + items[i].quality);
             if (!items[i].name.equals("Aged Brie")
                     && !items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                logger.debug("Name is not 'Aged Brie' and not 'Backstage passes to a TAFKAL80ETC concert'");
                 if (items[i].quality > 0) {
-                    logger.debug("Quality is more than 0");
                     if (!items[i].name.equals("Sulfuras, Hand of Ragnaros")) {
-                        logger.debug("Name is not 'Sulfuras, Hand of Ragnaros'");
                         if (items[i].name.contains("Conjured")) {
-                            logger.debug("Name contains 'Conjured'");
                             if (items[i].quality == 1) {
-                                logger.debug("Item contains 'Conjured' and its quality is equals to 1. Actually = " + items[i].quality);
                                 items[i].quality = items[i].quality - 1;
-                                logger.debug("And quality lost 1 decrease to " + items[i].quality);
                             } else if (items[i].sellIn < 0) {
-                                logger.debug("Item contains 'Conjured' and its quality is under to 0. Actually = " + items[i].quality);
                                 items[i].quality = items[i].quality - 2;
-                                logger.debug("And quality lost 2 and decrease to " + items[i].quality);
                             } else {
-                                logger.debug("Item contains 'Conjured' and its quality is above to 1. Actually = " + items[i].quality);
                                 items[i].quality = items[i].quality - 1;
-                                logger.debug("And quality lost 1 decrease to " + items[i].quality);
                             }
                         } else {
-                            logger.debug("Name don't contains 'Conjured'");
                             items[i].quality = items[i].quality - 1;
-                            logger.debug("And quality lost 1 and decrease to " + items[i].quality);
                         }
                     }
                 }
             } else {
-                logger.debug("Is 'Aged Brie' or 'Backstage passes to a TAFKAL80ETC concert'");
                 if (items[i].quality < 50) {
-                    logger.debug("Quality is lower than 50");
                     items[i].quality = items[i].quality + 1;
-                    logger.debug("Add 1 point to quality to " + items[i].name);
                     if (items[i].name.equals("Backstage passes to a TAFKAL80ETC concert")) {
-                        logger.debug("Item's name equals to 'Backstage passes to a TAFKAL80ETC concert'");
                         if (items[i].sellIn < 11) {
-                            logger.debug("Item have its 'sellIn' lower than 11");
                             if (items[i].quality < 50) {
-                                logger.debug("Item's 'quality' is lower than 50");
                                 items[i].quality = items[i].quality + 1;
-                                logger.debug("Add 1 point to quality and quality is now equal to " + items[i].quality);
                             }
                         }
 
                         if (items[i].sellIn < 6) {
-                            logger.debug("Item have its 'sellIn' lower than 6" + items[i].quality);
                             if (items[i].quality < 50) {
-                                logger.debug("Item have its 'quality' lower than 50" + items[i].quality);
                                 items[i].quality = items[i].quality + 1;
-                                logger.debug("Add 1 point to quality and is now equal to " + items[i].quality);
                             }
                         }
                     }
