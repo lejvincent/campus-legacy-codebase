@@ -10,9 +10,9 @@ public class GildedRose {
     }
 
     public void updateQuality() {
-        reports = reports + "Init : " + items[0] + "<br>";
+        reports = reports + "Init : " + items[0] + "<br />";
         for (Item item : items) {
-            reports = reports + "START ->" + " Name = " + item.name + ", SellIn = " + item.sellIn + ", Quality = " + item.quality + "<br>";
+            reports = reports + "START ->" + " Name = " + item.name + ", SellIn = " + item.sellIn + ", Quality = " + item.quality + "<br />";
             if (item.name.equals("Aged Brie")) {
                 this.isAgedBrie(item);
             } else if (item.name.equals("Backstage passes to a TAFKAL80ETC concert")) {
@@ -24,7 +24,7 @@ public class GildedRose {
             } else {
                 this.isAnnoying(item);
             }
-            reports = reports + "END ->" + " Name = " + item.name + ", SellIn = " + item.sellIn + ", Quality = " + item.quality + "<br>";
+            reports = reports + "END ->" + " Name = " + item.name + ", SellIn = " + item.sellIn + ", Quality = " + item.quality + "<br />";
         }
         logger.debug("Reports : <br>" +reports);
     }
@@ -34,7 +34,7 @@ public class GildedRose {
     }
 
     public void isAnnoying(Item item) {
-        reports = reports + "is Annoying <br>";
+        reports = reports + "is Annoying <br />";
         item.sellIn = item.sellIn - 1;
 
         if (item.quality < 50 && item.sellIn >= 0) {
@@ -49,7 +49,7 @@ public class GildedRose {
     }
 
     public void isAgedBrie(Item item) {
-        reports = reports + "is Aged Brie <br>";
+        reports = reports + "is Aged Brie <br />";
         item.sellIn = item.sellIn - 1;
 
         if (item.quality < 50) {
@@ -58,7 +58,7 @@ public class GildedRose {
     }
 
     public void isTAFKAL80ETCconcert(Item item) {
-        reports = reports + "is TAFKAL80ETC Concert <br>";
+        reports = reports + "is TAFKAL80ETC Concert <br />";
         item.sellIn = item.sellIn - 1;
 
         if (item.quality < 50) {
@@ -89,7 +89,7 @@ public class GildedRose {
     }
 
     public void isConjured(Item item) {
-        reports = reports + "is Conjured <br>";
+        reports = reports + "is Conjured <br />";
         item.sellIn = item.sellIn - 1;
 
         if (item.quality > 0) {
