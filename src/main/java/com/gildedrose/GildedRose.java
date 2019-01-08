@@ -26,6 +26,7 @@ public class GildedRose {
             }
             reports = reports + "END ->" + " Name = " + item.name + ", SellIn = " + item.sellIn + ", Quality = " + item.quality + "<br>";
         }
+        logger.debug(reports);
     }
 
     public Item[] getItems() {
