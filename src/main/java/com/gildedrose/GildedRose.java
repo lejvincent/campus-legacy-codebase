@@ -19,7 +19,7 @@ public class GildedRose {
                         if (items[i].name.contains("Conjured")) {
                             if (items[i].quality == 1) {
                                 items[i].quality = items[i].quality - 1;
-                            } else if (items[i].sellIn < 0 && items[i].quality == 0) {
+                            } else if (items[i].sellIn < 0 && items[i].quality != 0) {
                                 items[i].quality = items[i].quality - 2;
                             }
                         } else {
