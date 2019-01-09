@@ -12,4 +12,12 @@ public class GildedRoseTest {
         app.updateQuality();
         assertThat(app.items[0].quality).isEqualTo(11);
     }
+
+    @Test
+    void QualityDecreased (){
+        Item[] items = new Item[] { new Item("Annoying Band", 20, 10) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertThat(app.items[0].quality).isEqualTo(9);
+    }
 }

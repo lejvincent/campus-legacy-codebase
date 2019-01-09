@@ -12,7 +12,11 @@ public class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            this.increaseQuality(item);
+            if (!item.name.equals("Aged Brie")) {
+                this.decreaseQuality(item);
+            } else {
+                this.increaseQuality(item);
+            }
         }
     }
 
@@ -20,6 +24,12 @@ public class GildedRose {
     {
        item.quality ++;
        item.sellIn --;
+    }
+
+    public void decreaseQuality(Item item)
+    {
+        item.quality --;
+        item.sellIn --;
     }
 
     public Item[] getItems() {
