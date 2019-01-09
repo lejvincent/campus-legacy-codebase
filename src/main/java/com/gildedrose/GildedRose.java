@@ -30,7 +30,9 @@ public class GildedRose {
 
     public void decreaseQuality(Item item)
     {
-        item.quality --;
+        if (item.quality > 0) {
+            item.quality --;
+        }
         item.sellIn --;
     }
 
