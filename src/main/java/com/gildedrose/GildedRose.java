@@ -22,8 +22,10 @@ public class GildedRose {
 
     public void increaseQuality(Item item)
     {
-       item.quality ++;
-       item.sellIn --;
+        if (item.quality < 50) {
+            item.quality++;
+        }
+        item.sellIn--;
     }
 
     public void decreaseQuality(Item item)
