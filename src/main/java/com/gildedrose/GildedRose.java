@@ -98,7 +98,9 @@ public class GildedRose {
 
     public int isAgingRedWine(Item item) {
         if (item.sellIn < 0 && item.sellIn > -100) {
-            item.quality = item.quality + 1;
+            if (item.quality < 50) {
+                item.quality = item.quality + 1;
+            }
         } else if (item.sellIn < -100){
             item.quality = item.quality - 1;
         }
