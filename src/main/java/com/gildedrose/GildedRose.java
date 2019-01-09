@@ -1,4 +1,5 @@
 package com.gildedrose;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -12,28 +13,30 @@ public class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
-            if (!item.name.equals("Aged Brie")) {
-                this.decreaseQuality(item);
-            } else {
-                this.increaseQuality(item);
+            if (!item.name.equals("Sulfuras"))
+            {
+                if (!item.name.equals("Aged Brie")) {
+                    this.decreaseQuality(item);
+                } else {
+                    this.increaseQuality(item);
+                }
             }
         }
     }
 
-    public void increaseQuality(Item item)
-    {
+    public void increaseQuality(Item item) {
+
         if (item.quality < 50) {
             item.quality++;
         }
         item.sellIn--;
     }
 
-    public void decreaseQuality(Item item)
-    {
+    public void decreaseQuality(Item item) {
         if (item.quality > 0) {
-            item.quality --;
+            item.quality--;
         }
-        item.sellIn --;
+        item.sellIn--;
     }
 
     public Item[] getItems() {

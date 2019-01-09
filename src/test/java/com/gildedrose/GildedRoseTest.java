@@ -36,4 +36,13 @@ public class GildedRoseTest {
         app.updateQuality();
         assertThat(app.items[0].quality).isEqualTo(0);
     }
+
+    @Test
+    void sulfuraSQualityStaysTheSame (){
+        Item[] items = new Item[] { new Item("Sulfuras", 20, 50) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertThat(app.items[0].quality).isEqualTo(50);
+    }
+
 }
