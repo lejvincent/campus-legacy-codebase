@@ -118,4 +118,12 @@ class GildedRoseTest {
         app.updateQuality();
         assertThat(app.items[0].quality).isEqualTo(7);
     }
+
+    @Test
+    void VerifyIfExceptionProc() {
+        Item[] items = new Item[] { new Item("Aging Red Wine", -117, -7) };
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertThat(app.items[0].quality).isEqualTo(0);
+    }
 }
