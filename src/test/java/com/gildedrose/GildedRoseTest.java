@@ -112,4 +112,12 @@ public class GildedRoseTest {
         app.updateQuality();
         assertThat(app.items[0].quality).isEqualTo(19);
     }
+
+    @Test
+    void pleaseFixIt() {
+        Item[] items = new Item[]{new Item("Funny Pony", 0, 15)};
+        GildedRose app = new GildedRose(items);
+        app.updateQuality();
+        assertThat(app.items[0].quality).isEqualTo(14);
+    }
 }
