@@ -13,9 +13,11 @@ public class GildedRose {
 
     public void updateQuality() {
         for (Item item : items) {
+            logger.debug("START -> " + item.name + ", " + item.sellIn + ", " + item.quality);
             if (!item.name.equals("Sulfuras")) {
                 isAnnoyingBandBecauseNotSulfurasBand(item);
             }
+            logger.debug("EXIT -> " + item.name + ", " + item.sellIn + ", " + item.quality);
         }
     }
 
