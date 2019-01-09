@@ -11,6 +11,15 @@ public class GildedRose {
     }
 
     public void updateQuality() {
+        for (Item item : items) {
+            this.increaseQuality(item);
+        }
+    }
+
+    public void increaseQuality(Item item)
+    {
+       item.quality ++;
+       item.sellIn --;
     }
 
     public Item[] getItems() {
